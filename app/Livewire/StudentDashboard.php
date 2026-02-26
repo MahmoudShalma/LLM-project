@@ -10,6 +10,7 @@ class StudentDashboard extends Component
     {
         $enrollments = auth()->user()
             ->enrollments()
+            ->whereHas('course')
             ->with(['course.lessons' => fn ($q) => $q->ordered(), 'certificate'])
             ->latest('enrolled_at')
             ->get()

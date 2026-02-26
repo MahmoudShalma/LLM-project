@@ -69,6 +69,10 @@ class Enrollment extends Model
 
     public function getProgressPercentage(): int
     {
+        if ($this->course === null) {
+            return 0;
+        }
+
         $totalRequired = $this->course
             ->lessons()
             ->required()
